@@ -57,7 +57,7 @@ module.exports = {
 
           if(!correctPassword) {
             errors.password = 'password is incorrect'
-            throw new AuthenticationError(' password is incorrect', { errors })
+            throw new UserInputError(' password is incorrect', { errors })
           }
 
           const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: '1h'});
@@ -116,7 +116,7 @@ module.exports = {
           console.log(err)
           if(err.name === 'SequelizeUniqueConstraintError') {
             err.errors.forEach(
-              e => (errors[e.value] = `${e.value} is already taken`)   // ???  e.path
+              (e) => (errors[e.path] = `${e.path} is already taken`)   // ???  e.path
             )
           } else if(err.name === 'SequelizeValidationError') {
             err.errors.forEach(e => errors[e.path] = e.message)
