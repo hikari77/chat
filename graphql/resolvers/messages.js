@@ -15,7 +15,7 @@ module.exports = {
           
           const usernames = [user.username, otherUser.username]
 
-          const message = await Message.findAll({
+          const messages = await Message.findAll({
             where: {
               from: { [Op.in]: usernames },
               to: { [Op.in]: usernames }
