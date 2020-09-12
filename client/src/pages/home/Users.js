@@ -44,15 +44,15 @@ export default function Users() {
             return (
                 <div 
                     role="button"
-                    className={classNames("d-flex p-3 user-div bg-secondary", { 'bg-white': selected })}
+                    className={classNames(
+                        "d-flex p-3 bg-secondary user-div justify-content-center justify-content-md-start", 
+                    { 'bg-white': selected })}
                     onClick={() => dispatch({ type: 'SET_SELECTED_USER', payload: user.username })}
                     key={user.username}>
                     <Image 
                         src={user.imageUrl} 
-                        roundedCircle 
-                        className="mr-2" 
-                        style={{width:50, height:50, objectFit:'cover'}}/>
-                    <div>
+                        className="user-image" />
+                    <div className="d-none d-md-block ml-2">
                         <p className="text-success">{user.username}</p>
                         <p className="font-weight-light">{user.latestMessage ? user.latestMessage.content : 'you are connected'}</p>
                     </div>
@@ -62,7 +62,7 @@ export default function Users() {
 
 
     return (
-        <Col xs={4} className="p-0 ">
+        <Col xs={2} md={4} className="p-0 ">
             {usersMarkup}
         </Col>
     )
